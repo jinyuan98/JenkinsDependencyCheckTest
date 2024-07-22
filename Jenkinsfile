@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
-                git '/home/JenkinsDependencyCheckTest'
+                git url: 'https://github.com/jinyuan98/JenkinsDependencyCheckTest.git'
             }
         }
 
@@ -13,8 +13,9 @@ pipeline {
                             -o './'
                             -s './'
                             -f 'ALL' 
-                            --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-							--format HTML --format XML --suppression suppression.xml
+                            --prettyPrint
+                            --format HTML --format XML --suppression suppression.xml
+                            ''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
                 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
